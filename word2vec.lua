@@ -80,7 +80,7 @@ mlp:add(nn.HardTanh())
 --mlp:add(nn.HardTanh())
 
 -- outputs
-nclasses = 18
+nclasses = 8
 
 mlp:add(nn.Linear(hiddenLayer1Size,nclasses))
 mlp:add(nn.LogSoftMax())
@@ -95,7 +95,7 @@ trainer.learningRate = opt.learningRate
 trainer:train(trainingSet)
 
 -- Save for later
-torch.save('model4.th', mlp)
+torch.save('model.th', mlp)
 
 -- Accuracy
 function argmax(v)

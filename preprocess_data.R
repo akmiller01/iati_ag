@@ -1,7 +1,8 @@
 library(readr)
 library(data.table)
 
-setwd("C:/git/iati_ag")
+# setwd("C:/git/iati_ag")
+setwd("/media/alex/Windows/git/iati_ag")
 
 dat <- read_csv("iati_agriculture.csv")
 

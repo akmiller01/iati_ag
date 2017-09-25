@@ -7,7 +7,7 @@ cmd = torch.CmdLine()
 cmd:text()
 cmd:text('Options for my NN')
 cmd:option('-csv',"/media/alex/Windows/git/iati_ag/to_classify.csv",'csv file')
-cmd:option('-model',"model4.th",'prebuilt model')
+cmd:option('-model',"model.th",'prebuilt model')
 cmd:option('-header',true,'csv has header')
 -- etc...
 cmd:text()

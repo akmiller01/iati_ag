@@ -3,7 +3,7 @@ import random
 import pdb
 import unicodecsv
 
-prefix = "/git/iati_ag/"
+prefix = "/media/alex/Windows/git/iati_ag/"
 
 documents = []
 all_words_raw = []
