@@ -34,7 +34,7 @@ end
 
 
 idfutils.tfidf = function (self,sentence)
-    local tfidfVec = torch.Tensor(wordCount)
+    local tfidfVec = torch.Tensor(wordCount):zero()
     local sentenceWords = sentence:splitAtSpaces()
     for j=1,#sentenceWords,1 do
         --Find whether word exists in idf table
