@@ -76,36 +76,3 @@ df.to_csv(prefix+"all.csv",index=False,encoding="latin1")
 
 keys = pd.DataFrame({"key":unique_sectors,"value":unique_sector_names})
 keys.to_csv(prefix+"keys.csv",index=False)
-
-#Process our DC data for neural network
-# df = pd.read_csv(prefix+"Documents/Data/Yelp/dc.csv",header=0,encoding="latin1")
-
-#Create balanced set for prediction
-# segmented_reviews = {"0":[],"1":[]}
-# 
-# for index, row in df.iterrows():
-#     bib = str(int(row['bib']))
-#     review = row['review']
-#     segmented_reviews[bib].append(review)
-# 
-# min_length = min([len(segmented_reviews['1']),len(segmented_reviews['0'])])
-# random.shuffle(segmented_reviews['0'])
-# segmented_reviews['0'] = segmented_reviews['0'][:min_length]
-# random.shuffle(segmented_reviews['1'])
-# segmented_reviews['1'] = segmented_reviews['1'][:min_length]
-# 
-# zero_bib = pd.DataFrame({"review":segmented_reviews['0']})
-# one_bib = pd.DataFrame({"review":segmented_reviews['1']})
-# all_bib = [zero_bib,one_bib]
-# df = pd.concat(all_bib)
-# df = df[["review"]]
-
-#Keep only reviews
-# df = df[["review"]]
-
-#Let's remove the return characters and add spacing to common punctuation
-# df["review"] = df["review"].apply(clean_text).apply(removeStop)
-
-# Write csv
-# df.to_csv(prefix+"Documents/Data/Yelp/to_classify.csv",index=False,encoding="latin1")
-
