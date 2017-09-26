@@ -36,7 +36,8 @@ end
 idfutils.tfidf = function (self,sentence)
     local tfidfVec = torch.Tensor(wordCount):zero()
     local sentenceWords = sentence:splitAtSpaces()
-    for j=1,#sentenceWords,1 do
+	local sentenceWordsLen = #sentenceWords
+    for j=1,sentenceWordsLen,1 do
         --Find whether word exists in idf table
         if self.idf[sentenceWords[j]] ~= nil then
             local index = self.idf[sentenceWords[j]].index
@@ -46,6 +47,7 @@ idfutils.tfidf = function (self,sentence)
             for word in string.gmatch(sentence,sentenceWords[j]) do
                     tf = tf + 1
             end
+			tf = tf / sentenceWordsLen
             --place tf/idf at correct index in tfidfVec
             tfidfVec[index] = tf/idf
         end
