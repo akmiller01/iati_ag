@@ -1,2 +1,3 @@
 *.csv
 aiddata*
+tfidf_model.th
