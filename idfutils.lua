@@ -28,23 +28,26 @@ for line in io.lines(opt.csvfilename) do
     else
         wordCount = wordCount + 1
         local values = line:splitAtCommas()
-        idfutils.idf[values[1]] = {index = wordCount, value = values[2]}
+        idfutils.idf[values[1]] = {index = wordCount, value = tonumber(values[2])}
     end
 end
 
+idfutils.wordCount = wordCount
+
 
 idfutils.tfidf = function (self,sentence)
-    local tfidfVec = torch.Tensor(wordCount):zero()
+    local tfidfVec = torch.Tensor(self.wordCount):zero()
     local sentenceWords = sentence:splitAtSpaces()
 	local sentenceWordsLen = #sentenceWords
     for j=1,sentenceWordsLen,1 do
+		local lowerword = string.lower(sentenceWords[j])
         --Find whether word exists in idf table
-        if self.idf[sentenceWords[j]] ~= nil then
-            local index = self.idf[sentenceWords[j]].index
-            local idf = self.idf[sentenceWords[j]].idf
+        if self.idf[lowerword] ~= nil then
+            local index = self.idf[lowerword].index
+            local idf = self.idf[lowerword].value
             --Calc tf
             local tf = 0
-            for word in string.gmatch(sentence,sentenceWords[j]) do
+            for word in string.gmatch(string.lower(sentence),lowerword) do
                     tf = tf + 1
             end
 			tf = tf / sentenceWordsLen
