@@ -51,8 +51,8 @@ idfutils.tfidf = function (self,sentence)
                     tf = tf + 1
             end
 			tf = tf / sentenceWordsLen
-            --place tf/idf at correct index in tfidfVec
-            tfidfVec[index] = tf/idf
+            --place tf*idf at correct index in tfidfVec
+            tfidfVec[index] = tf*idf
         end
     end
     return tfidfVec
