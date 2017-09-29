@@ -1,6 +1,7 @@
 require 'torch'
-require 'nn'
-idfutils = require 'idfutils'
+require 'cltorch'
+nn = require 'clnn'
+idfutils = require 'idfutils2'
 
 -- Command line parameters
 cmd = torch.CmdLine()
@@ -11,10 +12,12 @@ cmd:option('-learningRate',0.1,'learning rate')
 cmd:option('-trainCsv',"/media/alex/Windows/git/iati_ag/train.csv",'training csv file')
 cmd:option('-testCsv',"/media/alex/Windows/git/iati_ag/test.csv",'testing csv file')
 cmd:option('-header',true,'csv has header')
+cmd:option('-device',1,'CL Torch device id')
 -- etc...
 cmd:text()
 opt = cmd:parse(arg)
 
+cltorch.setDevice(opt.device)
 
 -- Fully connected feed-forward network container
 mlp = nn.Sequential()
@@ -57,8 +60,8 @@ function loadData(dataFile,header)
     return dataset
 end
 
-trainingSet = loadData(opt.trainCsv,opt.header)
-testingSet = loadData(opt.testCsv,opt.header)
+trainingSet = loadData(opt.trainCsv,opt.header):cl()
+testingSet = loadData(opt.testCsv,opt.header):cl()
 print("Training obs: ",trainingSet:size())
 print("Testing obs: ",testingSet:size())
 
